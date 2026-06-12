@@ -1,0 +1,249 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+   <meta charset="UTF-8">
+
+    <title>Hotel Booker</title>
+
+    <link rel="icon"
+          type="image/png"
+          href="{% static 'logo.svg' %}">
+
+
+    <link rel="stylesheet"
+          href="{% static 'css/style.css' %}">
+
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap"
+          rel="stylesheet">
+
+</head>
+
+<body>
+ <a href="{% url 'hotels:home' %}"
+               class="signup-btn">
+
+                Back Home
+
+            </a>
+
+    
+
+<section class="booking-section">
+
+    <div class="booking-container">
+
+        <!-- LEFT SIDE -->
+
+        <div class="booking-info">
+
+            <h2>
+                Book Your Stay
+            </h2>
+
+            <p>
+                Reserve your perfect room today and enjoy
+                luxury comfort with world-class amenities.
+            </p>
+
+            <div class="booking-features">
+
+                <div class="feature">
+                    ✅ Free WiFi
+                </div>
+
+                <div class="feature">
+                    ✅ Swimming Pool
+                </div>
+
+                <div class="feature">
+                    ✅ Breakfast Included
+                </div>
+
+                <div class="feature">
+                    ✅ 24/7 Support
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- RIGHT SIDE -->
+
+        <div class="booking-form-card">
+
+            <form method="POST">
+
+                {% csrf_token %}
+
+                <!-- ERRORS -->
+
+                {% if messages %}
+
+                    {% for message in messages %}
+
+                        <div class="error-message">
+
+                            {{ message }}
+
+                        </div>
+
+                    {% endfor %}
+
+                {% endif %}
+
+
+                <!-- CHECK IN -->
+  <div class="form-group">
+
+                    <label>
+                        Full Name
+                    </label>
+
+                    <input
+                        type="text"
+                        name="user"
+                        value="{{ request.POST.check_in }}"
+                    >
+
+                </div>
+                <div class="form-group">
+
+                    <label>
+                        Check In
+                    </label>
+
+                    <input
+                        type="date"
+                        name="check_in"
+                        value="{{ request.POST.check_in }}"
+                    >
+
+                </div>
+
+
+                <!-- CHECK OUT -->
+
+                <div class="form-group">
+
+                    <label>
+                        Check Out
+                    </label>
+
+                    <input
+                        type="date"
+                        name="check_out"
+                        value="{{ request.POST.check_out }}"
+                    >
+
+                </div>
+
+
+                <!-- GUESTS -->
+
+                <div class="form-group">
+
+                    <label>
+                        Guests
+                    </label>
+
+                    <select name="guests">
+
+                        <option value="1">
+                            1 Guest
+                        </option>
+
+                        <option value="2">
+                            2 Guests
+                        </option>
+
+                        <option value="3">
+                            3 Guests
+                        </option>
+
+                        <option value="4">
+                            4 Guests
+                        </option>
+
+                    </select>
+
+                </div>
+
+
+                <!-- ROOM TYPE -->
+
+                <div class="form-group">
+
+                    <label>
+                        Room Type
+                    </label>
+
+                    <input
+                        type="text"
+                        name="room_type"
+                        value="{{ room_type }}"
+                        readonly
+                    >
+
+                </div>
+
+
+                <!-- PHONE -->
+
+                <div class="form-group">
+
+                    <label>
+                        Customer Phone Number
+                    </label>
+
+                    <input
+                        type="text"
+                        name="customer_number"
+                        value="{{ request.POST.customer_number }}"
+                    >
+
+                </div>
+
+
+                <!-- BUTTON -->
+
+                {% comment %} {% if user.is_authenticated %} {% endcomment %}
+
+                    <button type="submit"
+                            class="booking-submit-btn">
+
+                        Confirm Booking
+
+                    </button>
+                        <div class="error-message">
+
+                            Note:Book a room 2 weeks or one month before your check in date to avoid disappointment</br>
+                            Make half payment to secure your booking
+
+
+                        </div>
+
+                {% comment %} {% else %}
+
+                    <a href="{% url 'account:login' %}"
+                       class="booking-login-btn">
+
+                        Login To Book
+
+                    </a>
+
+                {% endif %} {% endcomment %}
+
+            </form>
+
+        </div>
+
+    </div>
+
+</section>
+
+</body>
+</html>

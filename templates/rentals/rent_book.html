@@ -1,0 +1,233 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+
+
+    <link rel="icon"
+          type="image/png"
+          href="{% static 'logo.svg' %}">
+
+    <title>Rent Product</title>
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+
+    <!-- Google Font -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+
+<body>
+     <a href="{% url 'hotels:home' %}"
+               class="signup-btn">
+
+                Back Home
+
+            </a>
+
+<!-- BOOKING SECTION -->
+
+<section class="booking-section">
+
+    <div class="booking-container">
+
+        <!-- LEFT SIDE -->
+
+        <div class="booking-info">
+
+            <h2>Rent a Product</h2>
+
+            <p>
+                Reserve your perfect products today and enjoy
+                luxury comfort with world-class amenities.
+            </p>
+
+            <div class="booking-features">
+
+                <div class="feature">
+                    ✅ Free Delivery
+                </div>
+
+                <div class="feature">
+                    ✅ 24/7 Support
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- RIGHT SIDE -->
+
+        <div class="booking-form-card">
+
+            <!-- DJANGO MESSAGES -->
+
+            {% if messages %}
+
+                {% for message in messages %}
+
+                    <div class="alert-message">
+
+                        {{ message }}
+
+                    </div>
+
+                {% endfor %}
+
+            {% endif %}
+
+
+            <!-- FORM -->
+
+            <form method="POST" action="">
+
+                {% csrf_token %}
+                
+                   <div class="form-group">
+
+                    <label>Your Fullname</label>
+
+                    <input
+                        type="text"
+                        name="user"
+                        required
+                    >
+
+                </div>
+
+                <!-- CHECK IN -->
+
+                <div class="form-group">
+
+                    <label>Check In</label>
+
+                    <input
+                        type="date"
+                        name="check_in"
+                        required
+                    >
+
+                </div>
+
+
+                <!-- CHECK OUT -->
+
+                <div class="form-group">
+
+                    <label>Check Out</label>
+
+                    <input
+                        type="date"
+                        name="check_out"
+                        required
+                    >
+
+                </div>
+
+
+                <!-- QUANTITY -->
+             {% if rental.name != "Ambulance" %}
+
+
+                <div class="form-group">
+
+                    <label>Quantity</label>
+
+                    <select name="quantity" required>
+
+                        {% for i in "x"|rjust:"100" %}
+
+                            <option value="{{ forloop.counter }}">
+
+                                {{ forloop.counter }}
+                                Quantity{% if forloop.counter > 1 %}s{% endif %}
+
+                            </option>
+
+                        {% endfor %}
+                                            </select>
+
+                        
+                        {% else %}
+                        
+                          <div class="form-group">
+
+                    <label>Location</label>
+
+                       <input
+                        type="text"
+                        name="destination"
+                        value="{{ destination|default:'None' }}"
+                        readonly
+                        required
+                    >
+
+
+                        {% endif %}
+
+                    </select>
+
+                </div>
+
+
+                <!-- PRODUCT -->
+             {% if rental.name != "Ambulance" %}
+
+                <div class="form-group">
+
+                    <label>Product</label>
+
+                    <input
+                        type="text"
+                        name="item"
+                        value="{{ item|default:'No Product Selected' }}"
+                        readonly
+                        required
+                    >
+
+                </div>
+{% endif %}
+
+                <!-- PHONE NUMBER -->
+
+                <div class="form-group">
+
+                    <label>Customer Phone Number</label>
+
+                    <input
+                        type="text"
+                        name="customer_number"
+                        placeholder="Enter phone number"
+                        required
+                    >
+
+                </div>
+
+
+                <!-- BUTTON -->
+
+
+                    <button type="submit"
+                            class="booking-submit-btn">
+
+                        Confirm Booking
+
+                    </button>
+
+                
+
+                
+
+            </form>
+
+        </div>
+
+    </div>
+
+</section>
+
+</body>
+</html>

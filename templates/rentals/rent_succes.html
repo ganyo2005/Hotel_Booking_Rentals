@@ -1,0 +1,119 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+    <meta charset="UTF-8">
+
+    <title>Booking Successful</title>
+
+    <link rel="stylesheet"
+          href="{% static 'css/style.css' %}">
+
+</head>
+
+<body>
+
+<section class="success-section">
+
+    <div class="success-card">
+
+        <div class="success-icon">
+            ✅
+        </div>
+
+        <h1>
+            Booking Successful
+        </h1>
+
+        <p class="success-text">
+
+            Your reservation has been created successfully.
+
+        </p>
+
+
+        <!-- RECEIPT -->
+
+        <div class="receipt-box">
+
+            <h2>Booking Receipt</h2>
+
+            
+
+            <div class="receipt-item">
+                <span>Room</span>
+                <strong>{{ renting.item }}</strong>
+            </div>
+
+            <div class="receipt-item">
+                <span>Check In</span>
+                <strong>{{ renting.check_in }}</strong>
+            </div>
+
+            <div class="receipt-item">
+                <span>Check Out</span>
+                <strong>{{ renting.check_out }}</strong>
+            </div>
+              {% if renting.quantity %}
+            <div class="receipt-item">
+                <span>quantity</span>
+                <strong>{{ renting.quantity }}</strong>
+            </div>
+            {% endif %}
+
+            <div class="receipt-item total">
+                <span>Total</span>
+            
+            </div>
+            {% if extra_charges %}
+                <div class="receipt-item total">
+                    <span>Extra Charges</span>
+                    <strong>{{ extra_charges }}</strong>
+                </div>
+            {% endif %}
+             {% if total_price %}
+                <div class="receipt-item total">
+                    <span>Total</span>
+                    <strong>{{ total_price }}</strong>
+                </div>
+            {% endif %}
+            {% if total_price %}
+                <div class="receipt-item total">
+                    <span>Total</span>
+                    <strong>{{ renting.total_price }}</strong>
+                </div>
+            {% endif %}
+
+        </div>
+
+
+        <!-- PAYMENT -->
+
+        <div class="payment-box">
+
+            <h2>
+                Payment Agent
+            </h2>
+
+            <p>
+                Please send payment to:
+            </p>
+
+            <h3>
+                {{ renting.agent_name }}
+            </h3>
+
+            <h2 class="agent-number">
+                {{ renting.agent_number }}
+            </h2>
+
+        </div>
+
+    </div>
+
+</section>
+
+</body>
+</html>

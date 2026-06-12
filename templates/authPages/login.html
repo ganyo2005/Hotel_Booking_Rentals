@@ -1,0 +1,45 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+
+    <title>Login</title>
+</head>
+<body>
+
+    <div class="signup-container">
+
+        <div class="signup-card">
+
+            <h1>Login</h1>
+
+            <p class="signup-text">
+                Welcome back! Please enter your credentials.
+            </p>
+
+            <form method="post" action=".">
+                {% csrf_token %}
+                {{ form.as_p }}
+                <button type="submit" class="signup-submit-btn">
+                    Login
+                </button>
+            </form>
+
+            <!-- Add this section -->
+            <p class="signup-text">
+                Don’t have an account?
+                <a href="{% url 'account:signup' %}">Sign up here</a>
+            </p>
+
+        </div>
+
+    </div>
+
+</body>
+</html>

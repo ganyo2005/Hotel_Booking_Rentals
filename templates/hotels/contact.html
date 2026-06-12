@@ -1,0 +1,245 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Contact Us</title>
+
+    <link rel="stylesheet"
+          href="{% static 'css/style.css' %}">
+
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap"
+          rel="stylesheet">
+
+</head>
+
+<body>
+     <a href="{% url 'hotels:home' %}"
+               class="signup-btn">
+
+                Back Home
+
+            </a>
+    <!-- NAVBAR -->
+
+
+    <!-- CONTACT HERO -->
+
+    <section class="contact-hero">
+
+        <div class="contact-hero-content">
+
+            <h1>
+                Partner With Us
+            </h1>
+
+            <p>
+                Own a hotel, apartment, villa, Airbnb,
+                guest house or rental service?
+                Add your property to our platform
+                and reach more customers today.
+            </p>
+
+        </div>
+
+    </section>
+
+
+    <!-- CONTACT SECTION -->
+
+    <section class="contact-section">
+
+        <div class="contact-container">
+
+            <!-- LEFT SIDE -->
+
+            <div class="contact-info">
+
+                <h2>
+                    Why Join Us?
+                </h2>
+
+                <p>
+                    We help hotels and rental property owners
+                    connect with thousands of travelers searching
+                    for the perfect stay every day.
+                </p>
+
+                <div class="contact-features">
+
+                    <div class="contact-feature">
+                        ✅ More Visibility
+                    </div>
+
+                    <div class="contact-feature">
+                        ✅ More Bookings
+                    </div>
+
+                    <div class="contact-feature">
+                        ✅ Easy Property Management
+                    </div>
+
+                    <div class="contact-feature">
+                        ✅ Trusted Platform
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <!-- RIGHT SIDE -->
+
+            <div class="contact-form-card">
+
+                <form method="POST">
+
+                    {% csrf_token %}
+
+                    <!-- FULL NAME -->
+
+                    <div class="form-group">
+
+                        <label>
+                            Full Name
+                        </label>
+
+                        <input
+                            type="text"
+                            name="name"
+                            placeholder="Enter your full name"
+                        >
+
+                    </div>
+
+
+                    <!-- BUSINESS NAME -->
+
+                    <div class="form-group">
+
+                        <label>
+                            Hotel / Business Name
+                        </label>
+
+                        <input
+                            type="text"
+                            name="business_name"
+                            placeholder="Enter business name"
+                        >
+
+                    </div>
+
+
+                    <!-- EMAIL -->
+
+                    <div class="form-group">
+
+                        <label>
+                            Email Address
+                        </label>
+
+                        <input
+                            type="email"
+                            name="email"
+                            placeholder="Enter your email"
+                        >
+
+                    </div>
+
+
+                    <!-- PHONE -->
+
+                    <div class="form-group">
+
+                        <label>
+                            Phone Number
+                        </label>
+
+                        <input
+                            type="text"
+                            name="phone"
+                            placeholder="Enter your number"
+                        >
+
+                    </div>
+
+
+                    <!-- SERVICE -->
+
+                    <div class="form-group">
+
+                        <label>
+                            Service Type
+                        </label>
+
+                        <select name="service">
+
+                            <option>
+                                Hotel
+                            </option>
+
+                            <option>
+                                Apartment
+                            </option>
+
+                            <option>
+                                Villa
+                            </option>
+
+                            <option>
+                                Airbnb
+                            </option>
+
+                            <option>
+                                Rental Service
+                            </option>
+
+                        </select>
+
+                    </div>
+
+
+                    <!-- MESSAGE -->
+
+                    <div class="form-group">
+
+                        <label>
+                            Message
+                        </label>
+
+                        <textarea
+                            name="message"
+                            rows="5"
+                            placeholder="Tell us about your property or service"
+                        ></textarea>
+
+                    </div>
+
+
+                    <!-- BUTTON -->
+
+                    <button type="submit"
+                            class="contact-submit-btn">
+
+                        Send Request
+
+                    </button>
+
+                </form>
+
+            </div>
+
+        </div>
+
+    </section>
+
+</body>
+
+</html>

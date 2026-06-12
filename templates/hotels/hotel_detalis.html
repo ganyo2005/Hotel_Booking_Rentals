@@ -1,0 +1,315 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Hotel Booker</title>
+
+    <link rel="stylesheet"
+          href="{% static 'css/style.css' %}">
+
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap"
+          rel="stylesheet">
+
+</head>
+
+<script>
+
+function openImage(src){
+
+    document.getElementById("imageModal").style.display = "flex";
+
+    document.getElementById("popupImg").src = src;
+}
+
+function closeImage(){
+
+    document.getElementById("imageModal").style.display = "none";
+}
+
+</script>
+
+<body>
+
+    <!-- NAVBAR -->
+
+    <nav class="navbar">
+
+        <div class="logo">
+
+            <div class="logo-box">
+
+                <img
+                    src="{% static 'logo.svg' %}"
+                    alt="HotelBooker Logo"
+                    class="logo-image"
+                >
+
+            </div>
+
+        </div>
+
+        <div class="nav-links">
+
+
+            
+
+ <a href="{% url 'hotels:home' %}"
+               class="signup-btn">
+
+                Back Home
+
+            </a>
+               
+
+
+        </div>
+
+    </nav>
+
+
+    <!-- HERO -->
+
+    <section class="hero">
+
+        <div class="hero-content">
+
+            <h1>
+                Find Your Perfect Stay
+            </h1>
+
+            <p>
+                Discover the best hotels in your area
+                with amazing deals
+            </p>
+
+            <div class="search-box">
+
+                <input
+                    type="text"
+                    placeholder="Search hotels, locations..."
+                >
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- HOTELS -->
+
+    <section class="hotel-grid">
+
+    <!-- ROOM 1 -->
+
+    {% if hotel.image2 and hotel.room2_name %}
+
+    <div class="hotel-card">
+
+        <div class="room-preview-card">
+
+            <img
+                src="{{ hotel.image2.url }}"
+                alt="{{ hotel.room2_name }}"
+                onclick="openImage(this.src)"
+                class="popup-image"
+            >
+
+            <div class="room-preview-content">
+
+                <h2>
+                    {{ hotel.room2_name }}
+                </h2>
+   {% if hotel.room2_price %}
+                <h3>
+                    ₵{{ hotel.room2_price }}
+                </h3>
+
+{% else %}
+      <h3>
+Contact for more information              
+  </h3>
+
+
+    {% endif %}
+
+                <p>
+                    {{ hotel.room2_amenites }}
+                </p>
+
+            </div>
+
+            <div class="card-bottom">
+
+                <a href="{% url 'hotels:book_hotel' hotel.id %}?room_type={{ hotel.room2_name }}"
+                   class="book-btn">
+
+                    Book This Room
+
+                </a>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    {% endif %}
+
+
+
+    <!-- ROOM 2 -->
+
+    {% if hotel.image3 and hotel.room3_name %}
+
+    <div class="hotel-card">
+
+        <div class="room-preview-card">
+
+            <img
+                src="{{ hotel.image3.url }}"
+                alt="{{ hotel.room3_name }}"
+                onclick="openImage(this.src)"
+                class="popup-image"
+            >
+
+            <div class="room-preview-content">
+
+                <h2>
+                    {{ hotel.room3_name }}
+                </h2>
+
+                {% if hotel.room3_price %}
+                    <h3>
+                        ₵{{ hotel.room3_price }}
+                    </h3>
+                {% else %}
+                    <h3>
+                        Contact for more information
+                    </h3>
+                {% endif %}
+
+                <p>
+                    {{ hotel.room3_amenites }}
+                </p>
+
+            </div>
+
+            <div class="card-bottom">
+
+                <a href="{% url 'hotels:book_hotel' hotel.id %}?room_type={{ hotel.room3_name }}"
+                   class="book-btn">
+
+                    Book This Room
+
+                </a>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    {% endif %}
+
+
+
+    <!-- ROOM 3 -->
+
+    {% if hotel.image4 and hotel.room4_name %}
+
+    <div class="hotel-card">
+
+        <div class="room-preview-card">
+
+            <img
+                src="{{ hotel.image4.url }}"
+                alt="{{ hotel.room4_name }}"
+                onclick="openImage(this.src)"
+                class="popup-image"
+            >
+
+            <div class="room-preview-content">
+
+                <h2>
+                    {{ hotel.room4_name }}
+                </h2>
+
+                <h3>
+                    ₵{{ hotel.room4_price }}
+                </h3>
+
+                <p>
+                    {{ hotel.room4_amenites }}
+                </p>
+
+            </div>
+
+            <div class="card-bottom">
+
+                <a href="{% url 'hotels:book_hotel' hotel.id %}?room_type={{ hotel.room4_name }}"
+                   class="book-btn">
+
+                    Book This Room
+
+                </a>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    {% endif %}
+
+</section>
+
+
+    <!-- IMAGE POPUP -->
+
+    <div id="imageModal" class="image-modal">
+
+        <span class="close-modal"
+              onclick="closeImage()">
+
+            &times;
+
+        </span>
+
+        <img
+            class="modal-content"
+            id="popupImg"
+        >
+
+    </div>
+
+
+    <!-- JAVASCRIPT -->
+
+    <script>
+
+        function openImage(src){
+
+            document.getElementById("imageModal").style.display = "flex";
+
+            document.getElementById("popupImg").src = src;
+        }
+
+        function closeImage(){
+
+            document.getElementById("imageModal").style.display = "none";
+        }
+
+    </script>
+
+</body>
+
+</html>

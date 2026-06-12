@@ -1,0 +1,365 @@
+2{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Hotel Booker</title>
+
+    <link rel="stylesheet"
+          href="{% static 'css/style.css' %}">
+
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap"
+          rel="stylesheet">
+
+</head>
+
+<script>
+
+function openImage(src){
+
+    document.getElementById("imageModal").style.display = "flex";
+
+    document.getElementById("popupImg").src = src;
+}
+
+function closeImage(){
+
+    document.getElementById("imageModal").style.display = "none";
+}
+
+</script>
+
+<body>
+
+    <!-- NAVBAR -->
+
+    <nav class="navbar">
+
+        <div class="logo">
+
+            <div class="logo-box">
+
+                <img
+                    src="{% static 'logo.svg' %}"
+                    alt="HotelBooker Logo"
+                    class="logo-image"
+                >
+
+            </div>
+
+        </div>
+
+        <div class="nav-links">
+
+
+            
+
+ <a href="{% url 'hotels:home' %}"
+               class="signup-btn">
+
+                Back Home
+
+            </a>
+               
+
+
+        </div>
+
+    </nav>
+
+
+    <!-- HERO -->
+
+    <section class="hero">
+
+        <div class="hero-content">
+
+            <h1>
+                Find Your Perfect Stay
+            </h1>
+
+            <p>
+                Discover the best hotels in your area
+                with amazing deals
+            </p>
+
+            <div class="search-box">
+
+                <input
+                    type="text"
+                    placeholder="Search hotels, locations..."
+                >
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- HOTELS -->
+<section class="hotel-grid">
+
+
+
+
+    {% if rental.image %}
+    <div class="hotel-card">
+        <div class="room-preview-card">
+
+            <img
+                src="{{ rental.image.url }}"
+                alt="{{ rental.image1_name }}"
+                onclick="openImage(this.src)"
+                class="popup-image"
+            >
+
+            <div class="room-preview-content">
+                <h2>{{ rental.image1_name }}</h2>
+
+                {% if rental.image1_price %}
+                <h3>₵{{ rental.image2_price }}</h3>
+                {% endif %}
+
+                <p>{{ rental.image1_location }}</p>
+            </div>
+              <div class="card-bottom">
+
+                <a  href="{% url 'rentals:rent' rental.id %}?name={{ rental.image1_location }}&price={{ rental.image1_price }}"
+                   class="book-btn">
+
+                    Book Now 
+
+                </a>
+
+            </div>
+
+        </div>
+    </div>
+    {% endif %}
+
+    {% if rental.image2 %}
+    <div class="hotel-card">
+        <div class="room-preview-card">
+
+            <img
+                src="{{ rental.image2.url }}"
+                alt="{{ rental.image2_name }}"
+                onclick="openImage(this.src)"
+                class="popup-image"
+            >
+
+            <div class="room-preview-content">
+                <h2>{{ rental.image2_name }}</h2>
+
+                {% if rental.image2_price %}
+                <h3>₵{{ rental.image2_price }}</h3>
+                {% endif %}
+
+                <p>{{ rental.image2_location }}</p>
+            </div>
+              <div class="card-bottom">
+
+                <a  href="{% url 'rentals:rent' rental.id %}?name={{ rental.image2_location }}&price={{ rental.image2_price }}"
+                   class="book-btn">
+
+                    Book Now 
+
+                </a>
+
+            </div>
+
+        </div>
+    </div>
+    {% endif %}
+
+    {% if rental.image3 %}
+    <div class="hotel-card">
+        <div class="room-preview-card">
+
+            <img
+                src="{{ rental.image3.url }}"
+                alt="{{ rental.image3_name }}"
+                onclick="openImage(this.src)"
+                class="popup-image"
+            >
+
+            <div class="room-preview-content">
+                <h2>{{ rental.image3_name }}</h2>
+
+                {% if rental.image3_price %}
+                <h3>₵{{ rental.image3_price }}</h3>
+                {% endif %}
+
+                <p>{{ rental.image3_location }}</p>
+            </div>
+              <div class="card-bottom">
+
+                <a  href="{% url 'rentals:rent' rental.id %}?name={{ rental.image3_location }}&price={{ rental.image3_price }}"
+                   class="book-btn">
+
+                    Book Now 
+                </a>
+
+            </div>
+
+        </div>
+    </div>
+    {% endif %}
+
+    {% if rental.image4 %}
+    <div class="hotel-card">
+        <div class="room-preview-card">
+
+            <img
+                src="{{ rental.image4.url }}"
+                alt="{{ rental.image4_name }}"
+                onclick="openImage(this.src)"
+                class="popup-image"
+            >
+
+            <div class="room-preview-content">
+                <h2>{{ rental.image4_name }}</h2>
+
+                {% if rental.image4_price %}
+                <h3>₵{{ rental.image4_price }}</h3>
+                {% endif %}
+
+                <p>{{ rental.image4_location }}</p>
+            </div>
+              <div class="card-bottom">
+
+                <a  href="{% url 'rentals:rent' rental.id %}?name={{ rental.image4_location }}&price={{ rental.image4_price }}"
+                   class="book-btn">
+
+                    Book Now 
+
+                </a>
+
+            </div>
+
+        </div>
+    </div>
+    {% endif %}
+    
+    
+    {% if rental.image5 %}
+    <div class="hotel-card">
+        <div class="room-preview-card">
+
+            <img
+                src="{{ rental.image5.url }}"
+                alt="{{ rental.image5_name }}"
+                onclick="openImage(this.src)"
+                class="popup-image"
+            >
+
+            <div class="room-preview-content">
+                <h2>{{ rental.image5_name }}</h2>
+
+                {% if rental.image5_price %}
+                <h3>₵{{ rental.image2_price }}</h3>
+                {% endif %}
+
+                <p>{{ rental.image5_location }}</p>
+            </div>
+              <div class="card-bottom">
+
+                <a  href="{% url 'rentals:rent' rental.id %}?name={{ rental.image5_location }}&price={{ rental.image5_price }}"
+                   class="book-btn">
+
+                    Book Now 
+
+                </a>
+
+            </div>
+
+        </div>
+    </div>
+    {% endif %}
+    
+    {% if rental.image6 %}
+    <div class="hotel-card">
+        <div class="room-preview-card">
+
+            <img
+                src="{{ rental.image6.url }}"
+                alt="{{ rental.image6_name }}"
+                onclick="openImage(this.src)"
+                class="popup-image"
+            >
+
+            <div class="room-preview-content">
+                <h2>{{ rental.image6_name }}</h2>
+
+                {% if rental.image6_price %}
+                <h3>₵{{ rental.image6_price }}</h3>
+                {% endif %}
+
+                <p>{{ rental.image6_location }}</p>
+            </div>
+              <div class="card-bottom">
+
+                <a  href="{% url 'rentals:rent' rental.id %}?name={{ rental.image6_location }}&price={{ rental.image6_price }}"
+                   class="book-btn">
+
+                    Book Now 
+
+                </a>
+
+            </div>
+
+        </div>
+    </div>
+    {% endif %}
+
+</section>
+
+
+    <!-- IMAGE POPUP -->
+
+    <div id="imageModal" class="image-modal">
+
+        <span class="close-modal"
+              onclick="closeImage()">
+
+            &times;
+
+        </span>
+
+        <img
+            class="modal-content"
+            id="popupImg"
+        >
+
+    </div>
+
+
+    <!-- JAVASCRIPT -->
+
+    <script>
+
+        function openImage(src){
+
+            document.getElementById("imageModal").style.display = "flex";
+
+            document.getElementById("popupImg").src = src;
+        }
+
+        function closeImage(){
+
+            document.getElementById("imageModal").style.display = "none";
+        }
+
+    </script>
+
+</body>
+
+</html>

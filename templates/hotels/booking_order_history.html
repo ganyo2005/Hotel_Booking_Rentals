@@ -1,0 +1,165 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Order History</title>
+
+    <link rel="stylesheet"
+          href="{% static 'css/style.css' %}">
+
+</head> 
+
+<body>
+
+
+
+
+     <a href="{% url 'hotels:home' %}"
+               class="signup-btn">
+
+                Back Home
+
+            </a>
+   <section class="hero">
+
+        <div class="hero-content">
+            <h1>
+                Your Bookings History
+
+          
+
+            <!-- SEARCH BAR -->
+
+          <form method="GET" class="search-box">
+
+    <input
+        type="text"
+        name="search"
+        placeholder="Please Enter Your Name you used in booking..."
+        value="{{ request.GET.search }}"
+    >
+
+    <button type="submit">
+        Search
+    </button>
+
+</form>
+
+        </div>
+
+    </section>
+
+    {% if request.GET.search %}
+             
+
+    <section class="booking-section">
+
+        <h1>
+            Your Bookings History
+        </h1>
+
+        <br>
+
+        {% if bookings %}
+
+            <div class="hotel-grid">
+
+                {% for booking in bookings %}
+
+                <div class="hotel-card">
+
+                    <div class="hotel-content">
+                        
+                        <h2>
+                            {{ booking.user }}
+                        </h2>
+
+                        <h2>
+                            {{ booking.hotel.name }}
+                        </h2>
+
+                        <br>
+
+                        <p>
+                            Room:
+                            {{ booking.room_type }}
+                        </p>
+
+                        <p>
+                            Check In:
+                            {{ booking.check_in }}
+                        </p>
+
+                        <p>
+                            Check Out:
+                            {{ booking.check_out }}
+                        </p>
+
+                        <p>
+                            Guests:
+                            {{ booking.guests }}
+                        </p>
+
+                        <p>
+                            Total:
+                            ₵{{ booking.total_price }}
+                        </p>
+
+                        <br>
+
+                      {% if booking.status == "pending" %}
+
+    <div class="hotel-rating">
+
+        Pending Approval
+
+    </div>
+
+{% elif booking.status == "confirmed" %}
+
+    <div class="hotel-rating">
+
+        Confirmed
+
+    </div>
+
+{% else %}
+
+    <div class="hotel-rating">
+
+        Cancelled
+
+    </div>
+
+{% endif %}
+
+                    </div>
+
+                </div>
+
+                {% endfor %}
+
+            </div>
+
+        {% else %}
+
+            <h3>
+                No bookings yet.
+            </h3>
+
+        {% endif %}
+
+    </section>
+    {% endif %}
+
+</body>
+
+</html>

@@ -1,0 +1,113 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+
+
+    <link rel="icon"
+          type="image/png"
+          href="{% static 'logo.svg' %}">
+
+    <title>Booking Successful</title>
+
+    <link rel="stylesheet"
+          href="{% static 'css/style.css' %}">
+
+</head>
+
+<body>
+
+<section class="success-section">
+
+    <div class="success-card">
+
+        <div class="success-icon">
+            ✅
+        </div>
+
+        <h1>
+            Booking Successful
+        </h1>
+
+        <p class="success-text">
+
+            Your {{ renting.item }} has been booked.
+
+        </p>
+
+
+        <!-- RECEIPT -->
+
+        <div class="receipt-box">
+
+            <h2>Booking Receipt</h2>
+
+            <div class="receipt-item">
+                <span>Hotel</span>
+                <strong>{{ rental.name }}</strong>
+            </div>
+
+            <div class="receipt-item">
+                <span>Room</span>
+                <strong>{{ renting.item }}</strong>
+            </div>
+
+            <div class="receipt-item">
+                <span>Check In</span>
+                <strong>{{ renting.check_in }}</strong>
+            </div>
+
+            <div class="receipt-item">
+                <span>Check Out</span>
+                <strong>{{ renting.check_out }}</strong>
+            </div>
+
+            <div class="receipt-item">
+                <span>quantity</span>
+                <strong>{{ renting.quantity }}</strong>
+            </div>
+
+            <div class="receipt-item total">
+                <span>Total</span>
+                                <strong>Please Contact us</strong>
+
+            
+            </div>
+
+        </div>
+
+
+        <!-- PAYMENT -->
+
+     <div class="payment-box">
+
+            <h2>
+                Payment Agent
+            </h2>
+
+            <p>
+                Please send payment to Gyau Benjamin:
+            </p>
+             
+              <p>
+            click to call agent
+            </p>
+<h2 class="agent-number">
+    <a href="tel:0553013397
+">
+       0553013397
+    </a>
+</h2>
+
+
+
+        </div>
+
+    </div>
+
+</section>
+
+</body>
+</html>

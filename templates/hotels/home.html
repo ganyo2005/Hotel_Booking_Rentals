@@ -1,0 +1,602 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hotel Booker</title>
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+
+    <!-- Google Font -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<style>
+  .about-text{
+
+    font-size:18px;
+
+    line-height:1.8;
+
+    color:#444;
+
+    max-width:700px;
+}
+
+.about-text a{
+
+    color:#2563eb;
+
+    text-decoration:none;
+
+    font-weight:600;
+
+    margin-left:8px;
+
+    transition:0.3s;
+}
+
+.about-text a:hover{
+
+    color:#1d4ed8;
+}
+
+
+/* MOBILE RESPONSIVE */
+
+@media(max-width:768px){
+
+    .about-text{
+
+        font-size:16px;
+
+        line-height:1.7;
+
+        text-align:center;
+
+        padding:0 15px;
+    }
+
+    .about-text a{
+
+        display:inline-block;
+
+        margin-top:10px;
+    }
+}
+
+
+/* TOP MESSAGE BAR */
+
+.top-bar{
+
+    position:fixed;
+
+    top:-100px;
+
+    left:0;
+
+    width:100%;
+
+    background:rgba(37, 99, 235, 0.65);
+
+    backdrop-filter:blur(10px);
+
+    color:white;
+
+    text-align:center;
+
+    padding:18px;
+
+    font-size:16px;
+
+    font-weight:500;
+
+    z-index:;
+
+    animation:slideDown 5s ease forwards;
+}
+
+
+/* LINK */
+
+.top-bar a{
+
+    color:white;
+
+    font-weight:700;
+
+    text-decoration:none;
+
+    margin-left:8px;
+}
+
+
+/* ANIMATION */
+
+@keyframes slideDown{
+
+    0%{
+
+        top:-100px;
+    }
+
+    10%{
+
+        top:0;
+    }
+
+    90%{
+
+        top:0;
+    }
+
+    100%{
+
+        top:-100px;
+    }
+}
+
+
+/* MOBILE */
+
+@media(max-width:768px){
+
+    .top-bar{
+
+        font-size:14px;
+
+        padding:15px 10px;
+    }
+}
+
+  
+    </style>
+<script>
+
+function toggleMenu() {
+
+    const menu = document.getElementById("menuDropdown");
+
+    if (menu.style.display === "block") {
+
+        menu.style.display = "none";
+
+    } else {
+
+        menu.style.display = "block";
+    }
+}
+
+</script>
+<body>
+
+    <!-- NAVBAR -->
+
+   <nav class="navbar">
+        <p > {{hotel.name}} </p>
+
+    <!-- MENU -->
+
+    <div class="menu-container">
+
+        <button class="menu-btn" onclick="toggleMenu()">
+            ☰
+        </button>
+
+
+
+
+
+<div class="top-bar">
+
+    📍 We are located at Asuogyaman, Ghana — Offering trusted Hotel Booking and Rental Services.
+
+    <a href="{% url 'hotels:about_us' %}">
+
+        Read More
+
+    </a>
+
+</div>
+        <div id="menuDropdown" class="menu-dropdown">
+
+            <a href="{% url 'hotels:home' %}">
+                Hotels
+            </a>
+
+            <a href="{% url 'rentals:rentals_home' %}">
+                Rentals
+            </a>
+            <a href="{% url 'booking:booking_order_history' %}">
+                Order History
+            </a>
+              <a href="{% url 'hotels:about_us' %}">
+                About Us
+            </a>
+            <a href="{% url 'contact:contact_us' %}">
+                Contact us
+                    {% if user.is_authenticated %}
+
+           <form method="POST" action="{% url 'account:logout' %}">
+
+        {% csrf_token %}
+     <button type="submit" class="signup-btn">
+        Logout
+     </button>
+
+      </form>
+          {% endif %}
+            </a>
+        </div>
+
+    </div>
+
+    <!-- LOGO -->
+
+    <div class="logo">
+
+        <div class="logo-box">
+
+            <img src="{% static 'logo.svg' %}"
+                 alt="HotelBooker Logo"
+                 class="logo-image">
+
+        </div>
+
+    </div>
+
+    <!-- NAV LINKS -->
+
+    <div class="nav-links">
+
+        {% if user.is_authenticated %}
+
+        <h1>
+            Welcome, {{ user.username }}!
+        </h1>
+
+        {% else %}
+
+        <a href="{% url 'account:login' %}"
+           class="login-btn">
+
+            Login
+
+        </a>
+
+        <a href="{% url 'account:signup' %}"
+           class="signup-btn">
+
+            Sign Up
+
+        </a>
+
+        {% endif %}
+
+    </div>
+
+</nav>
+
+
+    <!-- HERO SECTION -->
+
+    <section class="hero">
+
+        <div class="hero-content">
+
+            <h1>Find Your Perfect Stay</h1>
+
+            <p>
+                Discover the best hotels in your area with amazing deals
+            </p>
+
+            <!-- SEARCH BAR -->
+
+          <form method="GET" class="search-box">
+
+    <input
+        type="text"
+        name="search"
+        placeholder="Search hotels, locations..."
+        value="{{ request.GET.search }}"
+    >
+
+    <button type="submit">
+        Search
+    </button>
+
+</form>
+
+        </div>
+
+    </section>
+<div class="hotel-grid">
+
+    {% for hotel in hotels %}
+
+    <div class="hotel-card">
+
+        <img
+            src="{{ hotel.image.url }}"
+            alt="{{ hotel.name }}"
+            class="hotel-image"
+        >
+
+        <div class="hotel-content">
+
+            <div class="hotel-rating">
+                ⭐ {{ hotel.rating }}
+            </div>
+
+            <h3>{{ hotel.name }}</h3>
+
+            <p class="location">
+                📍 {{ hotel.location }}
+            </p>
+
+            <p class="description">
+                {{ hotel.description }}
+            </p>
+
+            <div class="amenities">
+
+                <span class="amenity">
+                    Free WiFi
+                </span>
+
+                <span class="amenity">
+                    Pool
+                </span>
+
+              
+
+            </div>
+
+            <div class="card-bottom">
+
+                <div class="price">
+                
+                </div>
+
+                <a href="{% url 'hotels:hotel_detail' hotel.id %}" class="book-btn">
+                    View Details and Book
+                </a>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    {% endfor %}
+
+</div>
+
+
+<h2 class="heroRental">
+     Rentals
+</h2>
+
+
+    <section class="hotel-grid">
+
+        <!-- ROOM 1 -->
+{% for rental in rentals %}
+        {% if rental.name != "Ambulance" %}
+        <div class="hotel-card">
+            <div class="room-preview-card">
+
+                <img
+                    src="{{ rental.image.url }}"
+                    alt="{{ rental.name }}"
+                    onclick="openImage(this.src)"
+                    class="popup-image"
+                >
+
+                <div class="room-preview-content">
+
+                    <h2>
+                        {{ rental.name }}
+                    </h2>
+
+                    <h3>
+                        {% comment %} ₵{{ rental.room2_price }} {% endcomment %}
+                    </h3>
+
+                    {% comment %} <p>
+                        {{ hotel.room2_amenites }}
+                    </p> {% endcomment %}
+
+                </div>
+
+                <div class="card-bottom">
+
+                    <a href="{% url 'rentals:rent' rental.id %}?item={{ rental.name }}"
+                       class="book-btn">
+
+                        View Details and Book
+
+                    </a>
+
+                </div>
+
+            </div>
+
+        </div>
+        {% endif %}
+        {% endfor %}
+      <div class="hotel-card">
+            <div class="room-preview-card">
+
+                <img
+                    src="{{ rentalsSingle.image.url }}"
+                    alt="{{ rentals.name }}"
+                    onclick="openImage(this.src)"
+                    class="popup-image"
+                >
+
+                <div class="room-preview-content">
+
+                    <h2>
+{{rentalsSingle.name}}                    </h2>
+
+                    <h3>
+                        {% comment %} ₵{{ rental.room2_price }} {% endcomment %}
+                    </h3>
+
+                    {% comment %} <p>
+                        {{ hotel.room2_amenites }}
+                    </p> {% endcomment %}
+
+                </div>
+
+                <div class="card-bottom">
+                    <a href="{% url 'rentals:rent_details'%}?name={{rentalsSingle.name}}" class="book-btn">
+
+                        View Details and Book
+
+                    </a>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        <!-- ROOM 2 -->
+{% comment %} 
+        <div class="hotel-card">
+
+            <div class="room-preview-card">
+
+                <img
+                    src="{{ hotel.image3.url }}"
+                    alt="{{ hotel.room3_name }}"
+                    onclick="openImage(this.src)"
+                    class="popup-image"
+                >
+
+              <div class="room-preview-content">
+
+                    <h2>
+                        {{ hotel.room3_name }}
+                    </h2>
+
+                    <h3>
+                        ₵{{ hotel.room3_price }}
+                    </h3>
+
+                    <p>
+                        {{ hotel.room3_amenites }}
+                    </p>
+
+                </div>
+
+                <div class="card-bottom">
+
+<a href="{% url 'hotels:book_hotel' hotel.id %}?room_type={{ hotel.room3_name }}"
+                       class="book-btn">
+
+                        View Details and Book
+
+                    </a>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- ROOM 3 -->
+         {% if hotel.image4 == null %}
+            {% else %}
+
+        <div class="hotel-card">
+
+            <div class="room-preview-card">
+
+                <img
+                    src="{{ hotel.image4.url }}"
+                    alt="{{ hotel.room4_name }}"
+                    onclick="openImage(this.src)"
+                    class="popup-image"
+                >
+
+                <div class="room-preview-content">
+
+                    <h2>
+                        {{ hotel.room4_name }}
+                    </h2>
+
+                    <h3>
+                        ₵{{ hotel.room4_price }}
+                    </h3>
+
+                    <p>
+                        {{ hotel.room4_amenites }}
+                    </p>
+
+                </div>
+
+                <div class="card-bottom">
+
+<a href="{% url 'hotels:book_hotel' hotel.id %}?room_type={{ hotel.room4_name }}"
+                       class="book-btn">
+
+                        View Details and Book
+
+                    </a>
+
+                </div>
+
+            </div>
+            
+
+        </div>
+        {% endif %}
+
+    </section> {% endcomment %}
+
+
+    <!-- IMAGE POPUP -->
+
+    <div id="imageModal" class="image-modal">
+
+        <span class="close-modal"
+              onclick="closeImage()">
+
+            &times;
+
+        </span>
+
+        <img
+            class="modal-content"
+            id="popupImg"
+        >
+
+    </div>
+
+
+    <!-- JAVASCRIPT -->
+
+    <script>
+
+        function openImage(src){
+
+            document.getElementById("imageModal").style.display = "flex";
+
+            document.getElementById("popupImg").src = src;
+        }
+
+        function closeImage(){
+
+            document.getElementById("imageModal").style.display = "none";
+        }
+
+    </script>
+</body>
+</html>
