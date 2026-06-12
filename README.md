@@ -89,7 +89,7 @@ hotel_booking/
 ### 1. Clone the Repository
 
 ```bash
-git clone https://github.com/yourusername/hotel-booker.git
+git clone https://github.com/ganyo2005/hotel-booker.git
 cd hotel-booker
 ```
 
@@ -188,7 +188,7 @@ http://anidasoexpressbooking/admin/
 
 ## Author
 
-Developed by: Your Name
+Developed by: Ganyo Nicholas
 
 ## License
 
